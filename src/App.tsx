@@ -8,12 +8,13 @@ import { Genre } from './hooks/useGenre'
 import PlatformSelector from './components/PlatformSelector'
 import { Platform } from './hooks/useGames';
 import SortSelector from './components/SortSelector'
+import GameHeading from './components/GameHeading'
 
 export interface GameQuery {
   genre: Genre | null;
   platform: Platform | null;
-  sortOrder:string;
-  searchText:string;
+  sortOrder: string;
+  searchText: string;
 }
 
 
@@ -33,7 +34,7 @@ function App() {
       }}
     >
       <GridItem area='nav'>
-        <NavBar onSearch={(searchText)=>setGameQuery({...gameQuery , searchText})} />
+        <NavBar onSearch={(searchText) => setGameQuery({ ...gameQuery, searchText })} />
       </GridItem>
       <Show above='lg'>
         <GridItem area='aside' paddingX={5} >
@@ -41,9 +42,10 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area='main'>
+        <GameHeading gameQuery={gameQuery} />
         <HStack spacing={5} paddingLeft={2} marginBottom={5}>
-        <PlatformSelector selectedPlatform={gameQuery?.platform} onSelectPlatform={(platform) => setGameQuery({...gameQuery , platform})} />
-        <SortSelector sortOrder={gameQuery.sortOrder} onSelectSortOrder={(sortOrder)=>setGameQuery({...gameQuery , sortOrder})}/>
+          <PlatformSelector selectedPlatform={gameQuery?.platform} onSelectPlatform={(platform) => setGameQuery({ ...gameQuery, platform })} />
+          <SortSelector sortOrder={gameQuery.sortOrder} onSelectSortOrder={(sortOrder) => setGameQuery({ ...gameQuery, sortOrder })} />
         </HStack>
         <GameGrid gameQuery={gameQuery} />
       </GridItem>
